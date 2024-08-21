@@ -1,0 +1,160 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+}
+
+header {
+    height: 20px;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+}
+.spaced {
+    padding-top: 50px;
+}
+.left-column {
+    width: 32%;
+    border: 3px solid lightgray;
+}
+
+.right-column {
+    position: relative;
+    width: 68%;
+    border: 3px solid lightgray;
+}
+
+#table_here {
+    display: none; /* Hidden by default */
+    position: fixed; /* Use fixed to center it relative to the viewport */
+    top: 100px; /* Adjust as needed for vertical alignment */
+    left: 33%;
+    transform: translateX(-50%); /* Center horizontally within the viewport */
+    width: 36%; /* Ensure it fits within the viewport */
+    height: 55vh; /* 70% of the viewport height */
+    background-color: white;
+    border: 20px solid #b0ccf3; /* Fixed border thickness */
+    opacity: 0.9; /* Increased opacity */
+    z-index: 2; /* Above the result_here div */
+    overflow-y: auto; /* Scroll if content overflows */
+    padding: 35px;
+    box-sizing: border-box;
+}
+
+#table_here .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: black; /* Set the color to black */
+}
+
+
+#hint_here {
+    display: none; /* Hidden by default */
+    position: absolute; /* Position it relative to the right column */
+    top: 10%; /* Adjust as needed for vertical alignment */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally within the right column */
+    width: 80%;
+    height: 70vh; /* 70% of the viewport height */
+    background-color: white;
+    border: 20px solid #B3E7D8; /* Adjusted to your specified border color */
+    opacity: 0.7;
+    z-index: 2;
+    overflow-y: auto; /* Scroll if content overflows */
+    padding: 35px;
+    box-sizing: border-box;
+}
+
+#hint_here .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #000000;
+}
+
+
+
+
+.top-row {
+    height: 50px;
+}
+
+.top-row button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.bottom-row {
+    height: 80%;
+}
+
+.bottom-row input {
+    height: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.overlay {
+    position: relative;
+}
+
+#challenge_here {
+    height: 20%;
+    z-index: 1;
+    border: 3px solid lightpink;
+    box-sizing: border-box;
+    background-color: white;
+    position: absolute;
+    padding-left: 30px;
+    padding-top: 30px;
+    top: 0;
+    left: 1%;
+    width: 98%;
+}
+
+#result_here {
+    height: calc(100%);
+    z-index: 0;
+    border: 3px solid #9980EC;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: white;
+    margin-top: 0;
+}
+
+#summary_here {
+    height: 20%;
+    border: 3px solid palegreen;
+    box-sizing: border-box;
+}
+
+
+/* Modal Custom Styles */
+.modal-dialog {
+    max-width: 25%;
+
+}
+
+.custom-modal-header {
+    background-color: #F8F9FA; /* Light gray background */
+    border-bottom: 35px solid #e7b3c8; /* Color matching the border color */
+}
+
+.custom-modal-body {
+    color: #333; /* Dark text color for readability */
+    max-height: 50%; 
+    padding: 35px;
+}
+
+.custom-modal-footer {
+    background-color: #F8F9FA; /* Light gray background */
+    border-top: 35px solid #e7b3c8; /* Color matching the border color */
+}
