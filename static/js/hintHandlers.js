@@ -1,33 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const hintBtn = document.getElementById('hint-btn');
-    const hintDiv = document.getElementById('hint_here');
-    const closeHintBtn = document.querySelector('#hint_here .close-btn');
-    const hintContent = document.getElementById('hint-content');
+    const hintButton = document.getElementById('hint-btn');
+    const hintContentDiv = document.getElementById('hint-content');
 
-    // Show the hint when the hint button is clicked
-    hintBtn.addEventListener('click', function() {
-        fetch('/get_hint_description')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data && data.hintDescription) {
-                    hintContent.innerHTML = `<p>${data.hintDescription}</p>`;
-                    hintDiv.style.display = 'block';
+    if (hintButton) {
+        hintButton.addEventListener('click', async function() {
+            try {
+                const response = await fetch('/get_hint_description');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (hintContentDiv) {
+                        hintContentDiv.innerHTML = data.hintDescription || 'No hint available';
+                    } else {
+                        console.error('Element with ID "hint-content" not found.');
+                    }
                 } else {
-                    console.error('Hint description data is missing.');
+                    console.error('Error fetching hint. Status:', response.status);
+                    if (hintContentDiv) {
+                        hintContentDiv.innerHTML = 'Error fetching hint.';
+                    }
                 }
-            })
-            .catch(error => console.error('Error fetching hint description:', error));
-    });
-
-    // Close the hint div
-    if (closeHintBtn) {
-        closeHintBtn.addEventListener('click', function() {
-            hintDiv.style.display = 'none';
+            } catch (error) {
+                console.error('Error fetching hint:', error);
+                if (hintContentDiv) {
+                    hintContentDiv.innerHTML = 'Error fetching hint.';
+                }
+            }
         });
     }
 });

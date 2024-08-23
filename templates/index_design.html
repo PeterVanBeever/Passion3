@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="flex-fill bottom-row d-flex align-items-center">
-                <input type="text" class="form-control" placeholder="Type your SQL here">
+                <div class="form-control" id="user_validate" contenteditable="true" placeholder="Type your SQL here"></div>
             </div>
         </div>
 
@@ -61,6 +61,7 @@
                         therefore use moment and location</p>
                 </div>
             </div>
+            <div id="word_count_display">Word Count: 0</div>
             <div id="summary_here"></div>
             <div id="hint_here">
                 <button class="close-btn">&times;</button>
@@ -80,11 +81,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
  <!-- JavaScript Files -->
+ <script src="{{ url_for('static', filename='js/formatter.js') }}"></script>
+ <script src="{{ url_for('static', filename='js/hintDisplay.js') }}" defer></script>
+ <script src="{{ url_for('static', filename='js/validate.js') }}" defer></script>
  <script src="{{ url_for('static', filename='js/challengeData.js') }}" defer></script>
  <script src="{{ url_for('static', filename='js/modalHandlers.js') }}"></script>
- <script src="{{ url_for('static', filename='js/hintHandlers.js') }}"></script>
  <script src="{{ url_for('static', filename='js/tableHandlers.js') }}"></script>
- <!-- <script src="{{ url_for('static', filename='js/challengeDescription.js') }}"></script> -->
+ 
 
 </body>
 </html>

@@ -15,14 +15,40 @@ header {
 .left-column {
     width: 32%;
     border: 3px solid lightgray;
+    background-color: #002451;
 }
-
+.flex-fill {
+    flex: 1; /* Allows the element to grow and fill available space */
+}
 .right-column {
     position: relative;
     width: 68%;
     border: 3px solid lightgray;
 }
-
+form-control {
+    flex: 1;
+    background-color: #002451;
+    color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    min-height: 100px;
+    white-space: pre-wrap; /* Keeps formatting */
+}
+#user_validate {
+    flex: 1; /* Allow it to grow and fill vertical space */
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1.4rem;
+    background-color: #002451;
+    color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    min-height: 100px; /* Ensure a minimum height */
+    white-space: pre-wrap; /* Keep formatting */
+    box-sizing: border-box; /* Include padding and border in height/width calculation */
+    padding-bottom: 50px;
+}
 #table_here {
     display: none; /* Hidden by default */
     position: fixed; /* Use fixed to center it relative to the viewport */
@@ -118,6 +144,7 @@ header {
     top: 0;
     left: 1%;
     width: 98%;
+    opacity: 0.4;
 }
 
 #result_here {
@@ -158,3 +185,55 @@ header {
     background-color: #F8F9FA; /* Light gray background */
     border-top: 35px solid #e7b3c8; /* Color matching the border color */
 }
+
+#sql-input {
+    font-family: monospace;
+    background-color: #1E1E1E;
+    color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    min-height: 100px;
+    white-space: pre-wrap; /* Keeps formatting */
+}
+
+#hint-content {
+    font-family: monospace;
+    background-color: #2E2E2E;
+    padding: 10px;
+    color: white;
+    white-space: pre-wrap; /* Keeps formatting */
+}
+
+span {
+    font-weight: bold;
+}
+.sql-table {
+    color: #ff7a87; /* Light purple color */
+}
+.sql-column {
+    color: rgb(128, 223, 255); /* Adjust to your preferred column color */
+}
+.sql-keyword {
+    color: #c191ff; /* Example color for keywords */
+}
+.sql-symbol {
+    color: #ffffff; /* Example color for symbols */
+}
+
+.sql-string {
+    color: #1aca9b; /* Example color for strings */
+}
+.sql-green {
+    color: #5cdfb1;
+}
+.sql-number {
+    color: #e7b900; /* Example color for numbers */
+}
+temp-green{
+    color: #5cdfb1;
+}
+.sql-single-quote {
+    color: #5cdfb1;
+}
+
