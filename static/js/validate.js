@@ -1,5 +1,6 @@
 // Global variable to store the fetched challenge data
-let challengeData = {};
+let highlightWords = [];
+
 
 // Function to fetch challenge data
 document.addEventListener('DOMContentLoaded', function() {
@@ -40,6 +41,29 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 });
+
+// Function to format text with highlight words
+function formatTextWithHighlights(text, highlightWords) {
+    console.log('Original Text:', text); // Debugging line
+    console.log('Highlight Words:', highlightWords); // Debugging line
+
+    function replaceFunc(match, offset, string) {
+        console.log('Match:', match); // Debugging line
+        if (!match || !match[0]) {
+            return ''; // Return empty if match or match[0] is undefined
+        }
+        
+        const word = match[0];
+        return highlightWords.includes(word.toLowerCase())
+            ? `<span class='sql-blue'>${word}</span>`
+            : word;
+    }
+
+    // Use regex to match highlight words
+    const pattern = new RegExp(`\\b(${highlightWords.join('|')})\\b`, 'gi');
+    return text.replace(pattern, replaceFunc);
+}
+
 
 // Function to count words
 function countWords(text) {
@@ -92,11 +116,20 @@ function handleValidationResult(result) {
         if (result.valid) {
             resultDiv.innerHTML = '<p class="text-success">Correct!</p>';
         } else {
-            // Show the correct answer in case of an incorrect input
-            resultDiv.innerHTML = `<p class="text-danger">Incorrect. The correct answer is: ${result.answer}</p>`;
+            // Check if result.answer is present and format it
+            if (result.answer) {
+                const formattedAnswer = formatTextWithHighlights(result.answer, highlightWords);
+                resultDiv.innerHTML = `<p class="text-danger">Incorrect. The correct answer is: ${formattedAnswer}</p>`;
+            } else {
+                resultDiv.innerHTML = '<p class="text-danger">Incorrect. The correct answer is not available.</p>';
+            }
         }
+    } else {
+        console.error('Element with id "result_here" not found.');
     }
 }
+
+
 
 // Add event listener for input validation
 const userValidateInput = document.getElementById('user_validate');

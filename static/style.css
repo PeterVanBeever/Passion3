@@ -233,6 +233,10 @@ span {
 temp-green{
     color: #5cdfb1;
 }
+.sql-blue {
+    color: blue;
+    font-weight: bold;
+}
 .sql-single-quote {
     color: #5cdfb1;
 }
