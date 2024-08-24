@@ -1,9 +1,6 @@
-// Global variable to store the fetched challenge data
-let challengeData = {};
-
 // Event listener for DOMContentLoaded to fetch challenge data
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('/get_challenge_data')
+    fetch('/data/get_challenge_data')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -11,8 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            challengeData = data; // Store the fetched challenge data
-
             const challengeIdDiv = document.getElementById('challengeIdDiv');
             const challengeDescriptor = document.getElementById('challenge_descriptor');
             const hintContentDiv = document.getElementById('hint-content');

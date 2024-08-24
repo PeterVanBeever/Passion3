@@ -4,13 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (sqlInput && wordCountDisplay) {
         let timeoutId;
-        sqlInput.addEventListener('input', function () {
+
+        function handleInput() {
             clearTimeout(timeoutId);
             timeoutId = setTimeout(() => {
                 const rawText = sqlInput.innerText;
                 const formattedSQL = formatSQLSyntax(rawText);
-
-                sqlInput.removeEventListener('input', arguments.callee);
 
                 // Only update the innerHTML if the content has changed to avoid unnecessary resets
                 if (sqlInput.innerHTML !== formattedSQL) {
@@ -18,12 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     setEndOfContenteditable(sqlInput);
                 }
 
-                sqlInput.addEventListener('input', arguments.callee);
-
                 const wordCount = getWordCount(sqlInput.innerText);
                 wordCountDisplay.innerText = `Word Count: ${wordCount}`;
             }, 200);
-        });
+        }
+
+        sqlInput.addEventListener('input', handleInput);
     } else {
         console.error('Element with id "user_validate" or "word_count_display" not found.');
     }
@@ -57,8 +56,6 @@ function formatSQLSyntax(sql) {
         .replace(/<span class="temp-table">(.*?)<\/span>/g, '<span class="sql-table">$1</span>'); // Finalize table formatting
 
     // Apply green formatting with single quotes specifically for the words "turtle", "soup", "Peter"
-    // We need to handle cases where quotes might already be present
-    // First, use a temporary marker
     tempSql = tempSql.replace(other, '<span class="temp-green">$1</span>');
 
     // Add single quotes around the green words with a span for single quotes
@@ -69,11 +66,6 @@ function formatSQLSyntax(sql) {
 
     return tempSql;
 }
-
-
-
-
-
 
 function getWordCount(text) {
     return text.trim().split(/\s+/).length;

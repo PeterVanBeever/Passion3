@@ -20,14 +20,16 @@ def get_highlight_words():
         with Session() as session:
             query = select(category_values.c.option_value)
             result = session.execute(query)
-            highlight_words = {row['option_value'] for row in result}
-        return jsonify(list(highlight_words))
+            highlight_words = [row[0] for row in result]  # Access the first item in each tuple
+        return jsonify(highlight_words)
     except SQLAlchemyError as e:
         app.logger.error(f"Database error: {e}")
         return jsonify({"error": "Database error"}), 500
     except Exception as e:
         app.logger.error(f"Unexpected error: {e}")
         return jsonify({"error": "Unexpected error"}), 500
+    
+
 
 @bp.route('/validate_input', methods=['POST'])
 def validate_input():
@@ -42,7 +44,7 @@ def validate_input():
 
         with Session() as session:
             query = select(challenges.c.answer).where(challenges.c.challenge_id == challenge_id)
-            correct_answer = session.execute(query).scalar()
+            correct_answer = session.execute(query).scalar()  # Fetch the scalar value directly
 
             if correct_answer is None:
                 return jsonify({"error": "Challenge not found"}), 404
@@ -60,14 +62,11 @@ def validate_input():
 
 
 
-
-
 @bp.route('/design')
 def design():
     # Uncomment next line to check if route is working
     # return "Design Route Working"
     return render_template('index_design.html')
-
 
 
 @bp.route('/get_challenge_data')
@@ -98,6 +97,7 @@ def get_challenge_data():
         return jsonify({"error": f"Unexpected error: {e}"}), 500
 
 
+
 @bp.route('/get_challenge_description')
 def get_challenge_description():
     try:
@@ -111,8 +111,6 @@ def get_challenge_description():
     except Exception as e:
         bp.logger.error(f"Unexpected error: {e}")
         return jsonify({"error": "Unexpected error"}), 500
-    
-
     
 
 
