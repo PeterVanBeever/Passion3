@@ -9,7 +9,11 @@
 </head>
 <body>
     
-<header class="border-bottom"></header>
+<header class="border-bottom">
+    <div class="logo-container text-center my-3">
+        <img src="{{ url_for('static', filename='images/Indello-logo.svg') }}" alt="Indello Logo" class="img-fluid">
+    </div>
+</header>
 
  <div class="container-fluid h-100">
     <div class="row h-100">
@@ -32,6 +36,9 @@
                 </div>
             </div>
             <div class="flex-fill bottom-row d-flex align-items-center">
+                <div id="stars-container" class="d-flex mb-2">
+                    <!-- Stars will be dynamically rendered here by checkAnswer.js -->
+                </div>
                 <div class="form-control" id="user_validate" contenteditable="true" placeholder="Type your SQL here"></div>
             </div>
         </div>
@@ -40,8 +47,12 @@
             <div class="position-relative overlay flex-grow-1">
                 <div id="challenge_here"><div id="challenge-title"><h2><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-gem" viewBox="0 0 16 16">
                     <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6zm11.386 3.785-1.806-2.41-.776 2.413zm-3.633.004.961-2.989H4.186l.963 2.995zM5.47 5.495 8 13.366l2.532-7.876zm-1.371-.999-.78-2.422-1.818 2.425zM1.499 5.5l5.113 6.817-2.192-6.82zm7.889 6.817 5.123-6.83-2.928.002z"/>
-                  </svg>&nbsp; Challenge! <div id="challengeIdDiv">#</div></h2></div><div id="challenge_descriptor"></div></div>
-                <div id="result_here"></div>
+                  </svg>&nbsp; SQL Challenge time! <div id="challengeIdDiv">#</div></h2></div><div id="challenge_descriptor">Challenge Descriptor Here</div></div>
+                <div id="result_here">
+                    <div id="result_here">
+                        <img src="{{ url_for('static', filename='images/set-get-data.svg') }}" alt="Result Icon" class="img-fluid">
+                    </div>
+                </div>
             </div>
             <div id="table_here">
                 <button class="close-btn">&times;</button>
@@ -88,7 +99,8 @@
 <!-- <script src="{{ url_for('static', filename='js/challengeData.js') }}" type="module" defer></script> -->
 <script src="{{ url_for('static', filename='js/modalHandlers.js') }}" type="module" defer></script>
 <script src="{{ url_for('static', filename='js/tableHandlers.js') }}" type="module" defer></script>
- 
+<script src="{{ url_for('static', filename='js/starRating.js') }}" type="module" defer></script>
+<script src="{{ url_for('static', filename='js/checkAnswer.js') }}" type="module" defer></script>
 
 </body>
 </html>

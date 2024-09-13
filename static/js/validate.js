@@ -117,22 +117,62 @@ async function validateInput() {
         }
     }
 }
-// Function to handle validation result
+
+// Array of SVG URLs
+const svgGraphics = [
+    'static/images/discovery-data.svg',
+    'static/images/downward-data.svg',
+    'static/images/good-data.svg',
+    'static/images/carry-data.svg',
+    'static/images/market-data.svg',
+    'static/images/set-get-data.svg'
+];
+
+let svgIndex = 0; // Current index in the SVG array
+let svgInterval = null; // To store the interval ID
+
+// Function to start cycling through SVGs
+function startSvgCycling() {
+    const resultDiv = document.getElementById('result_here');
+    if (!resultDiv) return;
+
+    svgInterval = setInterval(() => {
+        resultDiv.innerHTML = `<img src="${svgGraphics[svgIndex]}" alt="Graphic" />`;
+        svgIndex = (svgIndex + 1) % svgGraphics.length; // Cycle through the array
+    }, 5000); // Change every 1000ms (1 second)
+}
+
+// Function to stop cycling through SVGs
+function stopSvgCycling() {
+    if (svgInterval) {
+        clearInterval(svgInterval);
+        svgInterval = null;
+    }
+}
+
+
+// Update handleValidationResult to cycle through SVGs if incorrect
 function handleValidationResult(result) {
     const resultDiv = document.getElementById('result_here');
-    if (resultDiv) {
-        if (result.valid) {
-            resultDiv.innerHTML = '<p class="text-success">Correct!</p>';
-        } else {
-            if (result.answer) {
-                const formattedAnswer = formatTextWithHighlights(result.answer);
-                resultDiv.innerHTML = `<p class="text-danger">Incorrect. The correct answer is: ${formattedAnswer}</p>`;
-            } else {
-                resultDiv.innerHTML = '<p class="text-danger">Incorrect. The correct answer is not available.</p>';
-            }
-        }
+    const challengeHereDiv = document.getElementById('challenge_here');
+    if (!resultDiv || !challengeHereDiv) return;
+
+    if (result.valid) {
+        stopSvgCycling(); // Stop SVG cycling if the answer is correct
+        resultDiv.innerHTML = '<img src="static/images/vanbeever-photographer-collage.svg">';
+        // Set challenge_here to congratulatory message
+        challengeHereDiv.innerHTML = '<p><h1>Congratulations on your query skills!</h1></p>';
+        //  resultDiv.innerHTML = '<p class="text-success">Correct!</p>';
     } else {
-        console.error('Element with id "result_here" not found.');
+        if (!svgInterval) {
+            startSvgCycling(); // Start SVG cycling if the answer is incorrect
+        }
+        if (result.answer) {
+            const formattedAnswer = formatTextWithHighlights(result.answer);
+            // resultDiv.innerHTML += `<p class="text-danger">Incorrect. The correct answer is: ${formattedAnswer}</p>`;
+        } else {
+            // resultDiv.innerHTML += '<p class="text-danger">Incorrect. The correct answer is not available.</p>';
+        }
     }
 }
 
